@@ -1,7 +1,7 @@
 # Narrow Roll
 
 **Beschreibung:**  
-Ein Unity 3D-Game in dem man mit einer Kugel über Parkour strecken rollen muss.
+Ein Unity 3D-Game in dem der Spieler eine Kugel über eine Parkour-Strecke steuern muss, um das Ziel zu erreichen, ohne herunterzufallen.           
 
 ---
 
