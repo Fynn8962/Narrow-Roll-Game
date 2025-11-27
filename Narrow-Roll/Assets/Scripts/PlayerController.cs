@@ -3,7 +3,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
-
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -11,28 +10,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveForce = 125f; // movement force
     [SerializeField] private float maxSpeed = 12f;
     [SerializeField] private float airControl = 0.3f; // Control in the air (0-1)
-
     [Header("Physics")]
     [SerializeField] private float sphereMass = 5f;
     [SerializeField] private float drag = 0.5f;
     [SerializeField] private float angularDrag = 1.2f;
     [SerializeField] private float gravityMultiplier = 2f;
-
     [Header("Ground Check")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.6f;
 
- 
-
-
     private Rigidbody rb;
     private Vector2 moveInput;
     private bool isGrounded;
-
+    private GameRespawn respawnScript;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        respawnScript = GetComponent<GameRespawn>();
         // Rigidbody Setup for realistic sphere
         rb.mass = sphereMass;
         rb.linearDamping = drag;
@@ -40,25 +34,34 @@ public class PlayerController : MonoBehaviour
         rb.useGravity = true;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
-
         //for realistic roll-physic
         rb.freezeRotation = false;
 
-  
     }
-
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
+    public void OnReset(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        if (respawnScript != null)
+        {
+            respawnScript.RespawnPlayer();
+        }
+        else
+        {
+            Debug.LogWarning("GameRespawn Skript nicht gefunden!");
+        }
+    }
     void FixedUpdate()
     {
         CheckGround();
         rb.AddForce(Physics.gravity * (gravityMultiplier - 1f) * rb.mass, ForceMode.Force);
         HandleMovement();
     }
-
     void CheckGround()
     {
         //for better ground detection
@@ -71,7 +74,6 @@ public class PlayerController : MonoBehaviour
             groundLayer
         );
     }
-
     void HandleMovement()
     {
         //movement based on camera direction
@@ -90,29 +92,20 @@ public class PlayerController : MonoBehaviour
 
             // max. speed
             Vector3 horizontalVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
-
             if (horizontalVelocity.magnitude < maxSpeed)
             {
                 //Torque for realistic roll-physic
                 Vector3 torqueDirection = Vector3.Cross(Vector3.up, moveDirection);
                 rb.AddTorque(torqueDirection * currentMoveForce * 0.4f, ForceMode.Force);
-
                 //additional force for better control
                 rb.AddForce(moveDirection * currentMoveForce * 1.2f, ForceMode.Force);
             }
         }
     }
-
-
-
-            // Visualisierung im Editor
-            void OnDrawGizmosSelected()
+    // Visualize in Editor
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = isGrounded ? Color.green : Color.red;
         Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckDistance, 0.4f);
     }
 }
-
-
-
-
