@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class GameRespawn : MonoBehaviour
 {
-    [SerializeField] private float respawnThresholdY = -10f; // Y value when player gets reset after falling
+    [SerializeField] private float respawnThresholdY = -35f; // Y value when player gets reset after falling
     [SerializeField] private Vector3 respawnPosition = new Vector3(0f, 3f, 0f); // Respawn position
 
     private Rigidbody rb;
+    private TimerManager timerManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        timerManager = GetComponent<TimerManager>();    
 
     }
 
@@ -24,7 +26,7 @@ public class GameRespawn : MonoBehaviour
 
     public void RespawnPlayer()
     {
-
+        timerManager.ResetTimer();
 
         // Reset all velocities
         if (rb != null)

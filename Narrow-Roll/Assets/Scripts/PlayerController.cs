@@ -19,6 +19,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float groundCheckDistance = 0.6f;
 
+    [Header("Round")]
+    public int maxRounds;
+    public int currentRound;
+
+    private TimerManager timerManager;
+
+
     private Rigidbody rb;
     private Vector2 moveInput;
     private bool isGrounded;
@@ -29,6 +36,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         respawnScript = GetComponent<GameRespawn>();
+        timerManager = GetComponent<TimerManager>();
+
         // Rigidbody Setup for realistic sphere
         rb.mass = sphereMass;
         rb.linearDamping = drag;
@@ -38,6 +47,9 @@ public class PlayerController : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         //for realistic roll-physic
         rb.freezeRotation = false;
+
+        //find maximum rounds
+        maxRounds = Object.FindFirstObjectByType<FinishLine>().maxRounds;
 
     }
     public void OnMove(InputAction.CallbackContext context)
@@ -110,6 +122,40 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void IncreaseRound()
+    {
+        currentRound++;
+        Debug.Log("Round: " + currentRound);
+    }
+
+    public void StartTimer()
+    {
+        if(timerManager != null)
+        {
+            timerManager.StartTimer();
+        }
+    }
+
+    public void StopTimer()
+    {
+        if (timerManager != null)
+        {
+            timerManager.StopTimer();
+        }
+    }
+
+    // Optional: Access to timer data for other scripts
+    public TimerManager GetTimerManager()
+    {
+        return timerManager;
+    }
+
+
+
+
+
+
     // Visualize in Editor
     void OnDrawGizmosSelected()
     {
