@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveInput;
     private bool isGrounded;
     private GameRespawn respawnScript;
+    private ThirdPersonCameraController cameraReset;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,15 +49,21 @@ public class PlayerController : MonoBehaviour
     {
         if (!context.performed) return;
 
-        if (respawnScript != null)
-        {
-            respawnScript.RespawnPlayer();
-        }
-        else
-        {
-            Debug.LogWarning("GameRespawn Skript nicht gefunden!");
-        }
+            if (respawnScript != null)
+            {
+                respawnScript.RespawnPlayer();
+
+            }
+            else if (cameraReset != null)
+            {
+                cameraReset.ManualResetCamera();
+            }
+            else
+            {
+                Debug.LogWarning("GameRespawn Skript nicht gefunden!");
+            }
     }
+
     void FixedUpdate()
     {
         CheckGround();

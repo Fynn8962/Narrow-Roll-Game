@@ -31,7 +31,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
         controls = new PlayerControls();
         controls.Enable();
-        controls.CameraControls.MouseZoom.performed += MandleMouseScroll; //if mousewheel pressed --> call this function
+        controls.CameraControls.MouseZoom.performed += HandleMouseScroll; //if mousewheel pressed --> call this function
 
         Cursor.lockState = CursorLockMode.Locked;
         cam = GetComponent<CinemachineCamera>();
@@ -46,7 +46,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         }
     }
 
-    private void MandleMouseScroll(InputAction.CallbackContext context)
+    private void HandleMouseScroll(InputAction.CallbackContext context)
     {
         scrollDelta = context.ReadValue<Vector2>();
         Debug.Log($"Mouse is scrolling. Value: {scrollDelta}");
@@ -110,7 +110,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
         if (controls != null)
         {
-            controls.CameraControls.MouseZoom.performed -= MandleMouseScroll;
+            controls.CameraControls.MouseZoom.performed -= HandleMouseScroll;
             controls.Disable();
         }
     }

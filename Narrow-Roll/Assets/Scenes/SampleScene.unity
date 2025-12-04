@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   respawnThresholdY: -25
-  respawnPosition: {x: 0, y: 6, z: 0}
+  respawnPosition: {x: 0, y: 3, z: 0}
 --- !u!1 &1749268500
 GameObject:
   m_ObjectHideFlags: 0
