@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/main-menu.uss?fileID=7433441132597879392&amp;guid=07051193679203345aeef7a3e5d54812&amp;type=3#main-menu" />
+    <ui:VisualElement name="Panel" class="panel" style="flex-grow: 1; justify-content: center;">
+        <ui:VisualElement name="Container" class="menu" style="flex-grow: 1; width: 437px; max-height: 550px;">
+            <ui:VisualElement name="Logo" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/NarrowRoll-Logo2.png?fileID=2800000&amp;guid=3e1cb14dccc245747a366d4441a9d521&amp;type=3#NarrowRoll-Logo2&quot;); -unity-background-scale-mode: scale-to-fit; max-height: none; -unity-background-image-tint-color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: auto; min-height: 75px;" />
+            <ui:Button text="Continue" name="PlayButton" />
+            <ui:Button text="Restart" name="RestartButton" />
+            <ui:Button text="Quit" name="QuitButton" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

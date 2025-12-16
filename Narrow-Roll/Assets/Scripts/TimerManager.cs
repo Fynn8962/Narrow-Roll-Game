@@ -1,48 +1,81 @@
+using System;
 using UnityEngine;
 
 public class TimerManager : MonoBehaviour
 {
-    private float startTime;
-    private float endTime;
     private float currentTime;
     private bool timerRunning = false;
 
+    private bool timerHasStarted = false;
+    private bool hasFinished = false;
+
+    private float bestTime;
+    private float finaleTime;
+
+    private void Update()
+    {
+        if (timerRunning)
+        {
+            currentTime += Time.deltaTime;
+        }
+    }
 
     public void StartTimer()
     {
-        startTime = Time.time;
+        timerHasStarted = true; 
         timerRunning = true;
-        Debug.Log("Timer ist gestartet");
+        hasFinished = false;
+        Debug.Log("TM.cs: Timer gestartet");
+    }
+
+    public void PauseTimer()
+    {
+        timerRunning = false;
+        Debug.Log("TM.cs: Timer pausiert");
+    }
+
+    public void ResumeTimer()
+    {
+        if (!timerHasStarted || hasFinished) return;
+
+        timerRunning = true;
+        Debug.Log("TM.cs: Timer fortgesetzt");
+
+
+
     }
 
     public void StopTimer()
     {
         if (timerRunning)
         {
-            endTime = Time.time;
-            float elapsedTime = endTime - startTime;
-            timerRunning = false;
+            timerRunning = false; 
+            hasFinished = true;
 
-            Debug.Log("Timer gestoppt! Zeit: " + elapsedTime.ToString("F2") + " Sekunden");
+            finaleTime = currentTime;
+
+            if (bestTime == 0f || finaleTime < bestTime)
+            {
+                bestTime = currentTime;
+                Debug.Log("TM.cs: Neue Bestzeit");
+            }
+
+            Debug.Log("TM.cs:Timer gestoppt! Zeit: " + finaleTime.ToString("F2") + " Sekunden");
         }
     }
 
     public void ResetTimer()
     {
-        startTime = 0f;
-        endTime = 0f;
         currentTime = 0f;
         timerRunning = false;
-        Debug.Log("Timer reset");
+        timerHasStarted = false;
+        hasFinished = false;
+        Debug.Log("TM.cs: Timer reset");
     }
 
     public float GetCurrentTime()
     {
-        if (timerRunning)
-        {
-            return Time.time - startTime;
-        }
-        return 0f;
+        return currentTime;
     }
 
     public bool IsTimerRunning()
@@ -50,8 +83,9 @@ public class TimerManager : MonoBehaviour
         return timerRunning;
     }
 
-    public float GetLastTime()
+
+    public float GetBestTime()
     {
-        return currentTime;
+        return bestTime;
     }
 }

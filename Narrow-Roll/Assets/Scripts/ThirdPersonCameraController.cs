@@ -34,6 +34,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         controls.CameraControls.MouseZoom.performed += HandleMouseScroll; //if mousewheel pressed --> call this function
 
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         cam = GetComponent<CinemachineCamera>();
         orbital = cam.GetComponent<CinemachineOrbitalFollow>();
         targetZoom = currentZoom = orbital.Radius;
@@ -48,12 +49,16 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void HandleMouseScroll(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0) return;
+
         scrollDelta = context.ReadValue<Vector2>();
        
     }
 
     void Update()
-    {
+    {   
+        if (Time.timeScale == 0) return;
+
         // Check if player was reseted
         if (playerTransform != null)
         {

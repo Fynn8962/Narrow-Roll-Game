@@ -54,11 +54,19 @@ public class PlayerController : MonoBehaviour
     }
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0)
+        {
+            moveInput = Vector2.zero;
+            return; 
+        }
+
         moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnReset(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0) return;
+
         if (!context.performed) return;
 
             if (respawnScript != null)

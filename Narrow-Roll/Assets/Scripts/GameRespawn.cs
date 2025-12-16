@@ -44,6 +44,6 @@ public class GameRespawn : MonoBehaviour
             rb.WakeUp();
         }
 
-        Debug.Log("Player wurde zurückgesetzt!");
+        Debug.Log("player reset");
     }
 }
