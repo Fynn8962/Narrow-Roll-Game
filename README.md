@@ -37,7 +37,9 @@ Somit ist das Spiel spielbar, jedoch fehlen noch essenzielle Aspekte wie ein Hom
  &nbsp;
 
 
-**Gameplay**
-<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-GIF1.gif" alt="Gameplay Video" width="300" >
+**Gameplay**                      
+<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-GIF1_1.gif" alt="Gameplay Video" width="500" >              
+<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-GIF2_1.gif" alt="Gameplay Video" width="500" >
+
 
 
