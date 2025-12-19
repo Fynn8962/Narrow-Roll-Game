@@ -26,4 +26,15 @@ Die grundlegenden Funktionen des Spiels sind gegeben. Dazu gehören Steuerung, R
 Somit ist das Spiel spielbar, jedoch fehlen noch essenzielle Aspekte wie ein Home-Menü, verschiedene Level und vor allem Leveldesign um das Spiel ansprechend zu gestalten.
 
 **Pausenmenü**
+<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-PauseMenu.png" alt="Pausenmenü" width="300" >
+
+ &nbsp;
+
+**Spieler Perspektive**
+<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-Game1.png" alt="Ingame Ansicht 1" width="300" >
+<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-Game2.png" alt="Ingame Ansicht 2" width="300" >
+
+**Gameplay**
+<img src="https://github.com/Fynn8962/Narrow-Roll-Game/blob/main/Images/NR-Video1.mp4" alt="Gameplay Video" width="300" >
+
 
